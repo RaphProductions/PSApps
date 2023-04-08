@@ -1,7 +1,7 @@
 ﻿using IWshRuntimeLibrary;
 using File = System.IO.File;
 
-namespace PowerAppLib.AppLoader
+namespace PSAppsLib.AppLoader
 {
     public class Application
     {

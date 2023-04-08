@@ -1,4 +1,4 @@
-﻿namespace PowerAppLib.AppLoader
+﻿namespace PSAppsLib.AppLoader
 {
     public enum AppType
     {

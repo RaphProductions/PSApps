@@ -1,7 +1,7 @@
-﻿using PowerAppLib.AppLoader;
+﻿using PSAppsLib.AppLoader;
 using System.IO.Compression;
 
-namespace PowerAppLib
+namespace PSAppsLib
 {
     public class AppInstaller
     {
@@ -23,6 +23,13 @@ namespace PowerAppLib
                 ZipFile.ExtractToDirectory(TempFolder + $"{i.Name}.zip", AppFolder + i.Name.Remove(i.Name.Length - 4));
 
                 Application app = new(AppFolder + i.Name.Remove(i.Name.Length - 4) + "\\");
+
+                if (i.Name.Remove(i.Name.Length - 4) != app.AppManifest.AppName)
+                {
+                    Directory.Delete(AppFolder + i.Name.Remove(i.Name.Length - 4), true);
+                    Console.WriteLine("The ZIP file name needs to be equals to the application name.");
+                    return 4;
+                }
 
                 if (app.AppManifest.AppAuthor != "RaphMar2022")
                 {
@@ -52,6 +59,35 @@ namespace PowerAppLib
 
                 File.Delete(TempFolder + $"{i.Name}.zip");
 
+                return 0;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return 1;
+            }
+        }
+
+        public static int UninstallApp(string AppName)
+        {
+            try
+            {
+                Application app = new(AppFolder + AppName + "\\");
+
+                Console.WriteLine($"Are you sure that you want to delete {app.AppManifest.AppName}, version {app.AppManifest.AppName} by {app.AppManifest.AppAuthor}? (y : yes, n : no)");
+
+                switch (Console.ReadLine())
+                {
+                    case "y":
+                        Directory.Delete(AppFolder + AppName, true);
+                        File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.CommonDesktopDirectory) + $@"\{app.AppManifest.AppDisplayName}.lnk");
+                        File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu) + $@"\{app.AppManifest.AppDisplayName}.lnk");
+                        break;
+                    case "n":
+                        return 2;
+                    default:
+                        return 2;
+                }
                 return 0;
             }
             catch (Exception e)
