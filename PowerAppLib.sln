@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerAppLib", "PowerAppLib\PowerAppLib.csproj", "{20D5050A-D31E-4A0E-95FB-8EBDCD51E75E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerApp", "PowerApp\PowerApp.csproj", "{92D36693-50E3-44D5-93C3-EAA49D69BD8F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{20D5050A-D31E-4A0E-95FB-8EBDCD51E75E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20D5050A-D31E-4A0E-95FB-8EBDCD51E75E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20D5050A-D31E-4A0E-95FB-8EBDCD51E75E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20D5050A-D31E-4A0E-95FB-8EBDCD51E75E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92D36693-50E3-44D5-93C3-EAA49D69BD8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92D36693-50E3-44D5-93C3-EAA49D69BD8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92D36693-50E3-44D5-93C3-EAA49D69BD8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92D36693-50E3-44D5-93C3-EAA49D69BD8F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9DCC2137-978F-44EE-8FA7-61D6A00E3334}
+	EndGlobalSection
+EndGlobal
