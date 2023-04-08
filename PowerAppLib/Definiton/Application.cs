@@ -24,6 +24,11 @@ namespace PowerAppLib.AppLoader
         {
             StreamWriter w = new(AppFolder + "Launcher.ps1");
 
+            // Add common lines to hide PowerShell
+            w.WriteLine("Add-Type -Name Window -Namespace Console -MemberDefinition '[DllImport(\"Kernel32.dll\")] public static extern IntPtr GetConsoleWindow(); [DllImport(\"user32.dll\")] public static extern bool ShowWindow(IntPtr hWnd, Int32 nCmdShow);'");
+            w.WriteLine("$consolePtr = [Console.Window]::GetConsoleWindow()");
+            w.WriteLine("[Console.Window]::ShowWindow($consolePtr, 0)");
+
             switch (AppManifest.AppType)
             {
                 case AppType.DotNetAssembly:
@@ -38,7 +43,6 @@ namespace PowerAppLib.AppLoader
         }
         public void BuildStartMenuShortcut(bool UsePublicSM)
         {
-            object shDesktop = (object)"Desktop";
             WshShell shell = new WshShell();
             string shortcutAddress = Environment.GetFolderPath(Environment.SpecialFolder.StartMenu) + $@"\{AppManifest.AppDisplayName}.lnk";
 
@@ -48,13 +52,13 @@ namespace PowerAppLib.AppLoader
             IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutAddress);
             shortcut.Description = AppManifest.AppDescription;
             shortcut.Hotkey = $"Ctrl+Shift+{AppManifest.AppDisplayName[0]}";
-            shortcut.TargetPath = $"powershell";
-            shortcut.Arguments = $"-WindowStyle Hidden '{AppFolder}Launcher.ps1'";
+            shortcut.TargetPath = $"cmd";
+            shortcut.Arguments = $"/c pwsh \"{AppFolder}Launcher.ps1\" -WindowStyle Hidden  -NoProfile";
+            shortcut.IconLocation = $"{AppFolder}{AppManifest.AppIcon}";
             shortcut.Save();
         }
         public void BuildDesktopShortcut(bool UsePublicDesktop)
         {
-            object shDesktop = (object)"Desktop";
             WshShell shell = new WshShell();
             string shortcutAddress = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + $@"\{AppManifest.AppDisplayName}.lnk";
 
@@ -64,8 +68,9 @@ namespace PowerAppLib.AppLoader
             IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutAddress);
             shortcut.Description = AppManifest.AppDescription;
             shortcut.Hotkey = $"Ctrl+Shift+{AppManifest.AppDisplayName[0]}";
-            shortcut.TargetPath = $"pwsh";
-            shortcut.Arguments = $"-WindowStyle Hidden '{AppFolder}Launcher.ps1'";
+            shortcut.TargetPath = $"cmd";
+            shortcut.Arguments = $"/c pwsh \"{AppFolder}Launcher.ps1\" -WindowStyle Hidden -NoProfile";
+            shortcut.IconLocation = $"{AppFolder}{AppManifest.AppIcon}";
             shortcut.Save();
         }
     }

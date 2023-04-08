@@ -13,6 +13,7 @@
         public string AppDescription { get; set; } = "An app.";
         public double AppVersion { get; set; } = 1.0;
         public AppType AppType { get; set; } = AppType.DotNetAssembly;
+        public string AppIcon { get; set; } = "";
         public string ManifestPath { get; set; } = "";
         public string ExecutableFile { get; set; } = "";
         public string MainType { get; set; } = "";
@@ -45,10 +46,13 @@
                                     }
                                     break;
                                 case "DisplayName":
-                                    AppName = value;
+                                    AppDisplayName = value;
                                     break;
                                 case "Name":
                                     AppName = value;
+                                    break;
+                                case "Icon":
+                                    AppIcon = value;
                                     break;
                                 case "Description":
                                     AppDescription = value;
@@ -57,6 +61,7 @@
                                     AppAuthor = value;
                                     break;
                                 case "Version":
+                                    value = value.Replace('.', ',');
                                     AppVersion = double.Parse(value);
                                     break;
                                 case "Executable":
@@ -88,7 +93,7 @@
         public AppManifest(string v)
         {
             ManifestPath = v;
-            LoadManifest();
+            Console.WriteLine(LoadManifest());
         }
     }
 }

@@ -12,12 +12,17 @@ namespace PowerAppLib
         {
             try
             {
+                if (!Directory.Exists(AppFolder))
+                    Directory.CreateDirectory(AppFolder);
+                if (!Directory.Exists(TempFolder))
+                    Directory.CreateDirectory(TempFolder);
+
                 FileInfo i = new(CompressedAppPath);
 
                 File.Copy(CompressedAppPath, TempFolder + $"{i.Name}.zip", true);
-                ZipFile.ExtractToDirectory(TempFolder + $"{i.Name}.zip", AppFolder + i.Name);
+                ZipFile.ExtractToDirectory(TempFolder + $"{i.Name}.zip", AppFolder + i.Name.Remove(i.Name.Length - 4));
 
-                Application app = new(AppFolder + i.Name + "\\");
+                Application app = new(AppFolder + i.Name.Remove(i.Name.Length - 4) + "\\");
 
                 if (app.AppManifest.AppAuthor != "RaphMar2022")
                 {
@@ -30,9 +35,9 @@ namespace PowerAppLib
                                 CreateAppScriptAndShortcuts(app);
                                 break;
                             case "n":
-                                break;
+                                return 3;
                             default:
-                                break;
+                                return 3;
                         }
                     }
                     else
@@ -49,8 +54,9 @@ namespace PowerAppLib
 
                 return 0;
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e);
                 return 1;
             }
         }

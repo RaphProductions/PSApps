@@ -46,7 +46,7 @@ public class Program
         Console.WriteLine();
         Console.WriteLine("Examples :");
 
-        Console.WriteLine("powerapp install C:\\foo.papackage");
+        Console.WriteLine("powerapp install C:\\foo.zip");
         Console.WriteLine("powerapp uninstall foo");
     }
 }
