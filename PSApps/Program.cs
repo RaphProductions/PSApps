@@ -95,17 +95,17 @@ public class Program
 
     public static void ShowHelpApplet()
     {
-        Console.WriteLine("PowerApps help");
+        Console.WriteLine("PSApps help");
 
-        Console.WriteLine("powerapp install <appfile> (Install an app)");
-        Console.WriteLine("powerapp uninstall <appname> (Uninstall an app)");
-        Console.WriteLine("powerapp getinfo <appname> (Opens a window with some infos about an app)");
+        Console.WriteLine("psapps install <appfile> (Install an app)");
+        Console.WriteLine("psapps uninstall <appname> (Uninstall an app)");
+        Console.WriteLine("psapps getinfo <appname> (Opens a window with some infos about an app)");
 
         Console.WriteLine();
         Console.WriteLine("Examples :");
 
-        Console.WriteLine("powerapp install C:\\foo.zip");
-        Console.WriteLine("powerapp uninstall foo");
-        Console.WriteLine("powerapp getinfo foo");
+        Console.WriteLine("psapps install C:\\foo.zip");
+        Console.WriteLine("psapps uninstall foo");
+        Console.WriteLine("psapps getinfo foo");
     }
 }
